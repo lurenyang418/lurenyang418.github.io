@@ -1,7 +1,7 @@
 # The URL the site will be built for
 base_url = "https://blog.lurenyang.com"
 
-title = "吱吱吱"
+title = "找个位置随便坐"
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -37,7 +37,4 @@ even_menu = [
     { url = "$BASE_URL/page/about", name = "关于" },
 ]
 
-even_title = "MICE's nest"
-[author]
-name = "mice"
-homepage = "lurenyang.com"
+even_title = "卢氏传说"
