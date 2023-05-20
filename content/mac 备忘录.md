@@ -30,4 +30,11 @@ tags = ["macOS", "memos"]
    9. [skim](https://skim-app.sourceforge.io/) 小巧好用的 pdf 阅读器
    10. [stats](https://github.com/exelban/stats) 小巧好用的系统资源监控
 
-3. TBD
+3. 关闭和启用 spotlight 的索引
+
+   ```zsh
+   # 关闭
+   sudo mdutil -a -i off
+   # 启用
+   sudo mdutil -a -i on
+   ```
