@@ -26,8 +26,8 @@ highlight_code = true
 # Put all your custom variables here
 
 # formula
-# katex_enable = true
-# katex_auto_render = true
+katex_enable = true
+katex_auto_render = true
 
 even_menu = [
     { url = "$BASE_URL", name = "主页" },
