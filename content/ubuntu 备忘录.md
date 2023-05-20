@@ -73,6 +73,8 @@ tags = ["ubuntu", "linux", "memos"]
 9. 通过 `ppa` 源安装最新版本
 
    ```bash
+   # 安装 add-apt-repository
+   apt install software-properties-common
    # git
    add-apt-repository ppa:git-core/ppa -y
    apt update
