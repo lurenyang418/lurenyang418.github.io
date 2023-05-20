@@ -1,5 +1,5 @@
 +++
-title = "alpine 备忘录 "
+title = "alpine 备忘录"
 date = "2023-05-20 14:30:00"
 [taxonomies]
 tags = ["alpine", "linux"]
