@@ -4,7 +4,9 @@
             <a href="{{ page.permalink }}">{{ page.title }}</a>
         </h1>
         <div class="post__meta">
-            <span class="post__time">{{ page.date | date(format="%F") }}</span>
+            <span class="post__time"> 发布于 {{ page.date | date(format="%F %T") }}</span>
+            <span> | </span>
+            <span class="post__updated_time"> 最后更新于 {{ page.updated | default(value=page.date) | date(format="%F %T") }}</span>
             {% if page.category %}
                 <div class="post__category">
                     <a href="{{ get_taxonomy_url(kind="category", name=page.category) }}">{{ page.category }}</a>
