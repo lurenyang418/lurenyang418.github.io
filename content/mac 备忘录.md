@@ -1,6 +1,7 @@
 +++
 title = "mac 备忘录"
 date = "2023-05-20 15:30:00"
+updated = "2026-06-01 11:32:05+06:00"
 [taxonomies]
 tags = ["macOS", "memos"]
 +++
@@ -20,15 +21,16 @@ tags = ["macOS", "memos"]
    > 使用方式 `brew install xxx`
 
    1. [alacritty](https://github.com/alacritty/alacritty) 开源终端软件
-   2. [appcleaner](http://freemacsoft.net/appcleaner/) 软件清理, 另一个是腾讯柠檬
+   2. ~~[appcleaner](http://freemacsoft.net/appcleaner/) 软件清理, 另一个是腾讯柠檬~~ 推荐[mole](https://github.com/tw93/mole)
    3. [iina](https://github.com/iina/iina) 开源视频播放器
    4. [foobar2000](https://www.foobar2000.org/) 音频播放器
    5. [localsend](https://github.com/localsend/localsend) 多平台(flutter)文件传输. 如果只是苹果生态, 直接使用 airdrop 就好
    6. [maczip](https://maczip.cn/) 解压缩软件
-   7. [raycast](https://www.raycast.com) 免费版本基本够用. 对标 alfred, 而 alfred 为了干掉苹果自带的 spotlight
-   8. [shottr](https://shottr.cc/) 小巧好用的截图软件
+   7. ~~[raycast](https://www.raycast.com) 免费版本基本够用. 对标 alfred, 而 alfred 为了干掉苹果自带的 spotlight~~ 自己写了个 [meow](https://github.com/magalab/meow)
+   8. ~~[shottr](https://shottr.cc/) 小巧好用的截图软件~~ 收费了
    9. [skim](https://skim-app.sourceforge.io/) 小巧好用的 pdf 阅读器
    10. [stats](https://github.com/exelban/stats) 小巧好用的系统资源监控
+   11. [coteditor](https://github.com/coteditor/CotEditor) 轻量级的文件编辑器
 
 3. 关闭和启用 spotlight 的索引
 
