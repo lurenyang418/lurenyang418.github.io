@@ -31,6 +31,8 @@ katex_auto_render = true
 even_menu = [
     { url = "$BASE_URL", name = "主页" },
     # { url = "$BASE_URL/categories", name = "分类" },
+    { url = "$BASE_URL/k8s", name = "K8S" },
+    { url = "$BASE_URL/weekly", name = "周记" },
     { url = "$BASE_URL/tags", name = "标签" },
     { url = "$BASE_URL/page/resume", name = "简历" },
     { url = "$BASE_URL/page/about", name = "关于" },
