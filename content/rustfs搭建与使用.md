@@ -15,13 +15,13 @@ tags = ["rustfs", "minio", "s3"]
 mkdir /data/rustfs/{data,logs}
 chown -R 10001:10001 /data/rustfs/{data,logs}
 
-# 其中 your-access-key 和 your-secrete-key 如果不指定的话, 默认均为rustfsadmin
+# 其中 your-access-key 和 your-secret-key 如果不指定的话, 默认均为rustfsadmin
 docker run -d \
   --name s3 \
   -p 9000:9000 \
   -p 9001:9001 \
   -e RUSTFS_ACCESS_KEY=<your-access-key> \
-  -e RUSTFS_SECRET_KEY=<your-secrete-key> \
+  -e RUSTFS_SECRET_KEY=<your-secret-key> \
   -v /data/rustfs/data:/data \
   -v /data/rustfs/logs:/logs \
   rustfs/rustfs:latest \
