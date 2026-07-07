@@ -18,6 +18,8 @@ taxonomies = [
 ]
 
 [markdown.highlighting]
+# Keep highlighting behavior deterministic across environments.
+code = true
 # theme see https://github.com/getzola/giallo?tab=readme-ov-file#themes
 theme = "catppuccin-mocha"
 
