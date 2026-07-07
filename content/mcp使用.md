@@ -42,7 +42,7 @@ def multiply(a: int, b: int) -> int:
 
 
 if __name__ == "__main__":
-    # 本地调试, 远端部署推荐 streamable-http
+    # 默认就是 stdio. 本地调试, 远端部署推荐 http(streamable-http)
     mcp.run(transport="stdio")
 ```
 
@@ -62,7 +62,8 @@ async def get_weather(location: str) -> str:
 
 
 if __name__ == "__main__":
-    mcp.run(transport="stdio")
+    # 默认是 http (streamable-http)协议.
+    mcp.run(transport="http", show_banner=False)
 ```
 
 4. 创建测试客户端
