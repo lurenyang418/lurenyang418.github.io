@@ -39,6 +39,7 @@
 
       {% block css %}
           <link rel="stylesheet" href="{{ get_url(path="site.css", trailing_slash=false) }}">
+          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/styles/github-dark.min.css">
           {% if config.extra.katex_enable %}
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css" crossorigin="anonymous">
           {% endif %}
@@ -123,6 +124,18 @@
 
       {% block js_body %}
           <script type="text/javascript" src="{{ get_url(path="even.js", trailing_slash=false) }}" ></script>
+                    <script defer src="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/lib/highlight.min.js"></script>
+                    <script>
+                        document.addEventListener("DOMContentLoaded", function () {
+                            if (!window.hljs) {
+                                return;
+                            }
+                            var blocks = document.querySelectorAll("pre code[class^='language-'], pre code[class*=' language-']");
+                            blocks.forEach(function (block) {
+                                window.hljs.highlightElement(block);
+                            });
+                        });
+                    </script>
       {% endblock js_body %}
     </body>
 
