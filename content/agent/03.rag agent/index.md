@@ -106,7 +106,7 @@ for msg in result["messages"]:
 
 ```shell
 # pdf 处理
-uv add langchain-community pypdf
+uv add langchain-community pypdf langchain_text_splitters
 
 # ollama 启用本地嵌入模型
 curl http://localhost:11434/api/embed -d '{
