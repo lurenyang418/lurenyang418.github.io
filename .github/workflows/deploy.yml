@@ -21,7 +21,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       - name: Setup Zola
-        uses: taiki-e/install-action@v2.85.13
+        uses: taiki-e/install-action@v2
         with:
           tool: zola@0.22.1
       - name: Build
