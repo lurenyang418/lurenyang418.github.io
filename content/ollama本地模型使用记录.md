@@ -1,8 +1,9 @@
 +++
 title = "两个本地模型"
 date = "2026-07-04 14:15:12+08:00"
+updated = "2026-09-03 09:32:05+06:00"
 [taxonomies]
-tags = ["ollama", "code"]
+tags = ["ollama", "code", "embedding"]
 +++
 
 > 在 mba M1 16G 可以运行的 
@@ -10,6 +11,7 @@ tags = ["ollama", "code"]
 ## 通用模型
 ```shell
 ollama run gemma4:12b-mlx
+ollama run qwen3.5:0.8b-mlx
 ```
 
 ## code 模型.
