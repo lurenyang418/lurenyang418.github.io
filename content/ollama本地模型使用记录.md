@@ -14,7 +14,7 @@ ollama run gemma4:12b-mlx
 ollama run qwen3.5:0.8b-mlx
 ```
 
-## code 模型.
+## code 模型
 ```shell
 robit/ornith-vision:9b
 ```
