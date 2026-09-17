@@ -5,13 +5,11 @@ date = "2026-06-08 19:39:20+08:00"
 tags = ["rustfs", "minio", "s3"]
 +++
 
-
 ## docker 拉起服务
 
-
 ```shell
-# 先创建相关目录并调整权限(目前有些问题, 官方未完全修复)
-# FATAL Server encountered an error and is shutting down: Io error: Permission denied (os error 13)
+# 先创建相关目录并调整权限
+# mkdir: cannot create directory '/var/log/rustfs/': Permission denied
 mkdir /data/rustfs/{data,logs}
 chown -R 10001:10001 /data/rustfs/{data,logs}
 
