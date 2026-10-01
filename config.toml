@@ -2,6 +2,9 @@
 base_url = "https://blog.lurenyang.com"
 
 title = "找个位置随便坐"
+description = "记录技术实践、工具使用和日常折腾。"
+generate_feeds = true
+feed_filenames = ["atom.xml"]
 
 # Whether to automatically compile all Sass files in the sass directory
 compile_sass = true
@@ -9,17 +12,18 @@ compile_sass = true
 # Whether to build a search index to be used later on by a JavaScript library
 build_search_index = false
 
+# Content doesn't use Tera templating (shell snippets with {{ }} should render as-is)
+skip_content_templating = ["**/*"]
+
 theme = "even"
 
 taxonomies = [
-    # You can enable/disable RSS
-    { name = "categories", feed = true },
-    { name = "tags", feed = true },
+  # You can enable/disable RSS
+  { name = "categories", feed = true },
+  { name = "tags", feed = true },
 ]
 
 [markdown.highlighting]
-# Keep highlighting behavior deterministic across environments.
-code = true
 # theme see https://github.com/getzola/giallo?tab=readme-ov-file#themes
 theme = "catppuccin-mocha"
 
@@ -31,14 +35,14 @@ katex_enable = true
 katex_auto_render = true
 
 even_menu = [
-    { url = "$BASE_URL", name = "主页" },
-    # { url = "$BASE_URL/categories", name = "分类" },
-    { url = "$BASE_URL/k8s", name = "K8S" },
-    { url = "$BASE_URL/agent", name = "Agent" },
-    { url = "$BASE_URL/weekly", name = "周记" },
-    { url = "$BASE_URL/tags", name = "标签" },
-    { url = "$BASE_URL/page/resume", name = "简历" },
-    { url = "$BASE_URL/page/about", name = "关于" },
+  { url = "$BASE_URL", name = "主页" },
+  # { url = "$BASE_URL/categories", name = "分类" },
+  { url = "$BASE_URL/k8s", name = "K8S" },
+  { url = "$BASE_URL/agent", name = "Agent" },
+  { url = "$BASE_URL/weekly", name = "周记" },
+  { url = "$BASE_URL/tags", name = "标签" },
+  { url = "$BASE_URL/page/resume", name = "简历" },
+  { url = "$BASE_URL/page/about", name = "关于" },
 ]
 
 even_title = "卢氏传说"

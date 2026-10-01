@@ -1,25 +1,26 @@
-{% import "post_macros.html" as post_macros %}
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
     <head>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <meta charset="utf-8">
 
       <!-- Enable responsiveness on mobile devices-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
 
       <title>{% block title %}{{ config.title }}{% endblock title %}</title>
+      <meta name="description" content="{% block meta_description %}{{ config.description }}{% endblock meta_description %}">
+      <meta name="theme-color" content="#f8f5ec">
+      <meta property="og:site_name" content="{{ config.title }}">
+      <meta property="og:title" content="{% block og_title %}{{ config.title }}{% endblock og_title %}">
+      <meta property="og:description" content="{% block og_description %}{{ config.description }}{% endblock og_description %}">
 
-      {% if config.generate_feed %}
-        <link rel="alternate" type={% if config.feed_filename == "atom.xml" %}"application/atom+xml"{% else %}"application/rss+xml"{% endif %} title="RSS" href="{{ get_url(path=config.feed_filename) | safe }}">
+      {% if config.generate_feeds %}
+        {% for feed_filename in config.feed_filenames %}
+          <link rel="alternate" type="{% if feed_filename == 'atom.xml' %}application/atom+xml{% elif feed_filename == 'rss.xml' %}application/rss+xml{% else %}application/xml{% endif %}" title="{{ config.title }}" href="{{ get_url(path=feed_filename) | safe }}">
+        {% endfor %}
       {% endif %}
 
       {% block js %}
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/slideout/1.0.1/slideout.min.js"></script>
           {% if config.extra.katex_enable %}
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css" crossorigin="anonymous">
-
           <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.js" crossorigin="anonymous"></script>
           <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/contrib/mathtex-script-type.min.js" crossorigin="anonymous"></script>
               {% if config.extra.katex_auto_render %}
@@ -39,7 +40,6 @@
 
       {% block css %}
           <link rel="stylesheet" href="{{ get_url(path="site.css", trailing_slash=false) }}">
-          <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/styles/github-dark.min.css">
           {% if config.extra.katex_enable %}
           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.7/dist/katex.min.css" crossorigin="anonymous">
           {% endif %}
@@ -54,16 +54,16 @@
 
             <div id="mobile-navbar" class="mobile-navbar">
               <div class="mobile-header-logo">
-                <a href="/" class="logo">{{ config.extra.even_title }}</a>
+                <a href="{{ config.base_url }}" class="logo">{{ config.extra.even_title }}</a>
               </div>
-              <div class="mobile-navbar-icon icon-out">
+              <button type="button" class="mobile-navbar-icon icon-out" aria-label="打开导航菜单" aria-expanded="false" aria-controls="mobile-menu">
                 <span></span>
                 <span></span>
                 <span></span>
-              </div>
+              </button>
             </div>
 
-            <nav id="mobile-menu" class="mobile-menu slideout-menu slideout-menu-left">
+            <nav id="mobile-menu" class="mobile-menu" aria-label="移动导航" hidden>
               <ul class="mobile-menu-list">
                 {% for item in config.extra.even_menu %}
                     <li class="mobile-menu-item">
@@ -96,7 +96,7 @@
                         <div class="posts">
                             {% for page in paginator.pages %}
                                 <article class="post">
-                                    {{ post_macros::title(page=page) }}
+                                    {{ <post_title page={page} /> }}
                                     <div class="post__summary">
                                         {{ page.summary | safe }}
                                     </div>
@@ -122,20 +122,11 @@
             {% endblock footer %}
         </div>
 
+        <button class="back-to-top" id="back-to-top" type="button" aria-label="回到顶部" title="回到顶部" hidden>↑</button>
+
       {% block js_body %}
-          <script type="text/javascript" src="{{ get_url(path="even.js", trailing_slash=false) }}" ></script>
-                    <script defer src="https://cdn.jsdelivr.net/npm/highlight.js@11.11.1/lib/highlight.min.js"></script>
-                    <script>
-                        document.addEventListener("DOMContentLoaded", function () {
-                            if (!window.hljs) {
-                                return;
-                            }
-                            var blocks = document.querySelectorAll("pre code[class^='language-'], pre code[class*=' language-']");
-                            blocks.forEach(function (block) {
-                                window.hljs.highlightElement(block);
-                            });
-                        });
-                    </script>
+          <script src="{{ get_url(path="even.js", trailing_slash=false) }}"></script>
+          <script type="module" src="{{ get_url(path="mermaid.js", trailing_slash=false) }}"></script>
       {% endblock js_body %}
     </body>
 

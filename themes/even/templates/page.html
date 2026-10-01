@@ -1,38 +1,39 @@
 {% extends "index.html" %}
-{% import "post_macros.html" as post_macros %}
+
 
 {% block title %}{{config.title}} - {{page.title}}{% endblock title %}
+{% block og_title %}{{ page.title }} - {{ config.title }}{% endblock og_title %}
+{% block meta_description %}{% if page.description %}{{ page.description }}{% elif page.summary %}{{ page.summary | striptags | trim | truncate(length=160) }}{% else %}{{ config.description }}{% endif %}{% endblock meta_description %}
+{% block og_description %}{% if page.description %}{{ page.description }}{% elif page.summary %}{{ page.summary | striptags | trim | truncate(length=160) }}{% else %}{{ config.description }}{% endif %}{% endblock og_description %}
+
+{% component render_toc(items) %}
+<ul>
+    {% for heading in items %}
+    <li>
+        <a href="{{ heading.permalink | safe }}" class="toc-link">{{ heading.title }}</a>
+        {% if heading.children %}
+            {{ <render_toc items={heading.children} /> }}
+        {% endif %}
+    </li>
+    {% endfor %}
+</ul>
+{% endcomponent render_toc %}
 
 {% block content %}
 
 {% if page.toc %}
-<div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">Contents</h2>
-    <div class="post-toc-content always-active">
+<details class="post-toc" id="post-toc" open>
+    <summary class="post-toc-title">文章目录</summary>
+    <div class="post-toc-content">
         <nav id="TableOfContents">
-            <ul>
-                {% for h1 in page.toc %}
-                <li>
-                    <a href="{{h1.permalink | safe}}" class="toc-link">{{ h1.title }}</a>
-                    {% if h1.children %}
-                    <ul>
-                        {% for h2 in h1.children %}
-                        <li>
-                            <a href="{{h2.permalink | safe}}" class="toc-link">{{ h2.title }}</a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
+            {{ <render_toc items={page.toc} /> }}
         </nav>
     </div>
-</div>
+</details>
 {% endif %}
 
 <article class="post">
-    {{ post_macros::title(page=page) }}
+    {{ <post_title page={page} /> }}
     <div class="post-content">
       {{ page.content | safe }}
     </div>
@@ -69,4 +70,3 @@
 </article>
 
 {% endblock content %}
-

@@ -1,81 +1,68 @@
-function initMobile() {
-  var $mobileNav = document.getElementById("mobile-navbar");
-  var $mobileNavIcon = document.querySelector(".mobile-navbar-icon");
+(function () {
+  var menuButton = document.querySelector(".mobile-navbar-icon");
+  var menu = document.getElementById("mobile-menu");
+  var backToTop = document.getElementById("back-to-top");
 
-  var slideout = new Slideout({
-    "panel": document.getElementById("mobile-panel"),
-    "menu": document.getElementById("mobile-menu"),
-    "padding": 180,
-    "tolerance": 70
-  });
-  slideout.disableTouch();
-
-  $mobileNavIcon.addEventListener("click", function() {
-    slideout.toggle();
-  });
-
-  slideout.on("beforeopen", function () {
-    $mobileNav.classList.add("fixed-open");
-    $mobileNavIcon.classList.add("icon-click");
-    $mobileNavIcon.classList.remove("icon-out");
-  });
-
-  slideout.on("beforeclose", function () {
-    $mobileNav.classList.remove("fixed-open");
-    $mobileNavIcon.classList.add("icon-out");
-    $mobileNavIcon.classList.remove("icon-click");
-  });
-
-  document.getElementById("mobile-panel").addEventListener("touchend", function() {
-    slideout.isOpen() && $mobileNavIcon.click();
-  })
-}
-function initToc() {
-  var $toclink = document.querySelectorAll('.toc-link')
-  var $headerlink = document.querySelectorAll('.post-content h1 , .post-content h2')
-  var $tocLinkLis = document.querySelectorAll('.post-toc-content li')
-
-  var searchActiveTocIndex = function (array, target) {
-    if (!array.length) {
-      return -1
+  if (backToTop) {
+    function updateBackToTop() {
+      backToTop.hidden = window.scrollY < 480;
     }
-
-    target += 30
-    for (let i = 0; i < array.length - 1; i++) {
-      if (target > array[i].offsetTop && target <= array[i + 1].offsetTop) return i
-    }
-    if (target > array[array.length - 1].offsetTop) return array.length - 1
-    return -1
+    window.addEventListener("scroll", updateBackToTop, { passive: true });
+    backToTop.addEventListener("click", function () {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+    updateBackToTop();
   }
 
-  document.addEventListener("scroll", function() {
-    var scrollTop = document.body.scrollTop | document.documentElement.scrollTop
-    var activeTocIndex = searchActiveTocIndex($headerlink, scrollTop)
+  function setMenuOpen(open) {
+    if (!menuButton || !menu) return;
+    menu.hidden = !open;
+    menuButton.setAttribute("aria-expanded", String(open));
+    menuButton.setAttribute("aria-label", open ? "关闭导航菜单" : "打开导航菜单");
+    menuButton.classList.toggle("icon-click", open);
+    menuButton.classList.toggle("icon-out", !open);
+    document.body.classList.toggle("menu-open", open);
+  }
 
-    $toclink.forEach(function (el) {
-      el.classList.remove('active')
-    })
-    $tocLinkLis.forEach(function (el) {
-      el.classList.remove('has-active')
-    })
+  if (menuButton && menu) {
+    menuButton.addEventListener("click", function () {
+      setMenuOpen(menuButton.getAttribute("aria-expanded") !== "true");
+    });
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") setMenuOpen(false);
+    });
+    menu.addEventListener("click", function (event) {
+      if (event.target.closest("a")) setMenuOpen(false);
+    });
+  }
 
-    if ($toclink.length && activeTocIndex !== -1) {
-      $toclink[activeTocIndex].classList.add('active')
-      let ancestor = $toclink[activeTocIndex].parentNode
-      while (ancestor.tagName !== 'NAV') {
-        ancestor.classList.add('has-active')
-        ancestor = ancestor.parentNode.parentNode
-      }
+  var toc = document.getElementById("post-toc");
+  if (toc) {
+    if (!window.matchMedia("(min-width: 1520px)").matches) toc.removeAttribute("open");
+    var links = Array.prototype.slice.call(toc.querySelectorAll(".toc-link"));
+    var headings = links.map(function (link) {
+      var id = decodeURIComponent(link.hash.slice(1));
+      return document.getElementById(id);
+    });
+    var ticking = false;
+    function updateToc() {
+      var active = -1;
+      headings.forEach(function (heading, index) {
+        if (heading && heading.getBoundingClientRect().top <= 150) active = index;
+      });
+      links.forEach(function (link, index) {
+        var selected = index === active;
+        link.classList.toggle("active", selected);
+        link.setAttribute("aria-current", selected ? "location" : "false");
+      });
+      ticking = false;
     }
-  })
-}
-
-if (document.readyState === "complete" ||
-    (document.readyState !== "loading" && !document.documentElement.doScroll)
-) {
-  initMobile();
-  initToc();
-} else {
-  document.addEventListener("DOMContentLoaded", initMobile);
-  document.addEventListener("DOMContentLoaded", initToc);
-}
+    document.addEventListener("scroll", function () {
+      if (!ticking) {
+        window.requestAnimationFrame(updateToc);
+        ticking = true;
+      }
+    }, { passive: true });
+    updateToc();
+  }
+})();
