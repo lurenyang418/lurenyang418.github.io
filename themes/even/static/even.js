@@ -36,6 +36,43 @@
     });
   }
 
+  document.querySelectorAll(".post-content pre, .about pre").forEach(function (pre) {
+    var code = pre.querySelector(":scope > code");
+    if (!code || code.dataset.lang === "mermaid") return;
+
+    var wrapper = document.createElement("div");
+    wrapper.className = "code-block";
+    var toolbar = document.createElement("div");
+    toolbar.className = "code-block__toolbar";
+    var name = document.createElement("span");
+    name.className = "code-block__name";
+    name.textContent = code.dataset.name || code.dataset.lang || "代码";
+    var button = document.createElement("button");
+    button.type = "button";
+    button.className = "code-block__copy";
+    button.textContent = "复制";
+    button.setAttribute("aria-label", "复制代码");
+    toolbar.append(name, button);
+    pre.parentNode.insertBefore(wrapper, pre);
+    wrapper.append(toolbar, pre);
+
+    button.addEventListener("click", async function () {
+      var source = code.cloneNode(true);
+      source.querySelectorAll(".giallo-ln").forEach(function (number) { number.remove(); });
+      var lines = source.querySelectorAll(".giallo-l");
+      var text = lines.length
+        ? Array.prototype.map.call(lines, function (line) { return line.textContent; }).join("\n")
+        : source.textContent;
+      try {
+        await navigator.clipboard.writeText(text);
+        button.textContent = "已复制";
+      } catch (error) {
+        button.textContent = "复制失败";
+      }
+      window.setTimeout(function () { button.textContent = "复制"; }, 1800);
+    });
+  });
+
   var toc = document.getElementById("post-toc");
   if (toc) {
     if (!window.matchMedia("(min-width: 1520px)").matches) toc.removeAttribute("open");

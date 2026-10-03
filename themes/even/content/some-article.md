@@ -64,4 +64,4 @@ fn main() {
 
 ## An iframe
 
-{{ youtube(id="dQw4w9WgXcQ") }}
+[YouTube example](https://www.youtube.com/watch?v=dQw4w9WgXcQ)

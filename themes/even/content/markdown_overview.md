@@ -15,13 +15,16 @@ Quisque viverra a eros id auctor. Proin id nibh ut nisl dignissim pellentesque e
 
 > This is a quote
 
+> [!NOTE]
+> This is a GitHub-style alert.
+
 - a
 - bullet
 - point
 
 ## Some code
 
-```rust
+```rust,name=main.rs
 fn main() {
     let greetings = ["Hello", "Hola", "Bonjour",
                      "Ciao", "こんにちは", "안녕하세요",
@@ -67,4 +70,4 @@ Spirit (CC BY-SA 2.0)")
 
 ## An iframe
 
-{{ youtube(id="dQw4w9WgXcQ") }}
+[YouTube example](https://www.youtube.com/watch?v=dQw4w9WgXcQ)

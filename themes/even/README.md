@@ -1,6 +1,8 @@
 # Even
 Even is a clean, responsive theme based on the Hugo theme with the same name featuring categories, tags and pagination.
 
+This version requires Zola 0.23.6 or newer.
+
 ![even screenshot](https://github.com/getzola/even/blob/master/screenshot.png?raw=true)
 
 ## Contents
@@ -86,3 +88,24 @@ using `\\( ... \\)` for inline math or `\\[ ... \\]` / `$$ ... $$` for display m
 katex_enable = true
 katex_auto_render = true
 ```
+
+### Markdown features
+
+The example config enables heading links and GitHub-style alerts. The theme styles
+`NOTE`, `TIP`, `IMPORTANT`, `WARNING`, and `CAUTION` alerts. For example:
+
+```md
+> [!NOTE]
+> Check the configuration before deploying.
+```
+
+Code blocks get a copy button. You can add a filename with Zola's `name`
+annotation, for example `` ```rust,name=main.rs ``. Mermaid blocks keep their
+diagram renderer and do not get a copy button.
+
+If your site sets `skip_content_templating = ["**/*"]`, Markdown alerts, heading
+links, and code blocks still work. Zola 0.23 components inside Markdown require
+templating to be enabled for the relevant content files.
+
+For individual pages, `hidden = true` keeps a page accessible by URL while
+excluding it from listings, and `include_in_feeds = false` omits it from feeds.
