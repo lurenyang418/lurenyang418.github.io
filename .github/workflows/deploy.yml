@@ -26,6 +26,10 @@ jobs:
           tool: zola@0.23.6
       - name: Build
         run: zola build
+      - name: Verify generated assets
+        run: |
+          test -s public/mermaid.js
+          test -s public/even.js
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v5
         with:
