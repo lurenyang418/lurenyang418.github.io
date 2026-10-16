@@ -220,3 +220,13 @@ curl -X POST \
   -H 'Authorization: Bearer change-this-to-a-random-secret' \
   http://127.0.0.1:9090/upgrade/ui
 ```
+
+
+### 注意事项
+
+需要放行厂商的. 比如
+
+```bash
+echo 'Acquire::http::Proxy::mirrors-internal.cmecloud.cn "DIRECT";' \
+  | tee /etc/apt/apt.conf.d/90-mihomo-bypass-internal-mirror
+```
