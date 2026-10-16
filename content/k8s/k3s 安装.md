@@ -34,7 +34,7 @@ curl -sfL https://get.k3s.io |INSTALL_K3S_EXEC='--disable servicelb --disable tr
 ```plaintext
 clusters:
 - cluster:
-        server: https://<your-ip>:6443
-        # 去掉认证, 添加下面这个
-        insecure-skip-tls-verify: true
+    server: https://<your-ip>:6443
+    # 去掉认证, 添加下面这个
+    insecure-skip-tls-verify: true
 ```
