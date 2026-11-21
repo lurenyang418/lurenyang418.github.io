@@ -281,3 +281,36 @@ main {
     }
   }
 }
+
+.site-footer {
+  margin-top: 2.5rem;
+  padding: 1.2rem 20px;
+  text-align: center;
+  font-size: 0.85rem;
+  color: #8a8a8a;
+  border-top: 1px dashed #e6e6e6;
+  line-height: 1.6;
+
+  &__filing {
+    margin: 0;
+  }
+
+  &__link {
+    color: #8a8a8a;
+    text-decoration: none;
+    margin: 0 0.4rem;
+    white-space: nowrap;
+
+    &:hover {
+      color: $main-colour;
+      text-decoration: underline;
+    }
+  }
+
+  &__icon {
+    display: inline-block;
+    vertical-align: -2px;
+    margin-right: 0.2rem;
+    fill: currentColor;
+  }
+}

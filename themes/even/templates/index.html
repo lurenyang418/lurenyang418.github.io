@@ -119,6 +119,23 @@
             </main>
 
             {% block footer %}
+            <footer class="site-footer">
+                <p class="site-footer__filing">
+                    {% if config.extra.icp_filing %}
+                    <a class="site-footer__link" href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer">
+                        {{ config.extra.icp_filing }}
+                    </a>
+                    {% endif %}
+                    {% if config.extra.police_filing %}
+                    <a class="site-footer__link site-footer__link--police" href="https://beian.mps.gov.cn/" target="_blank" rel="noopener noreferrer">
+                        <svg class="site-footer__icon" viewBox="0 0 1024 1024" width="14" height="14" aria-hidden="true" focusable="false">
+                            <path fill="currentColor" d="M512 64L128 224v288c0 297.6 142.4 547.2 384 608 241.6-60.8 384-310.4 384-608V224L512 64z"/>
+                        </svg>
+                        {{ config.extra.police_filing }}
+                    </a>
+                    {% endif %}
+                </p>
+            </footer>
             {% endblock footer %}
         </div>
 

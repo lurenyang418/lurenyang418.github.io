@@ -23,6 +23,10 @@ taxonomies = [
   { name = "tags", feed = true },
 ]
 
+[markdown]
+github_alerts = true
+insert_anchor_links = "right"
+
 [markdown.highlighting]
 # theme see https://github.com/getzola/giallo?tab=readme-ov-file#themes
 theme = "catppuccin-mocha"
@@ -38,6 +42,7 @@ even_menu = [
   { url = "$BASE_URL", name = "主页" },
   # { url = "$BASE_URL/categories", name = "分类" },
   { url = "$BASE_URL/k8s", name = "K8S" },
+  { url = "$BASE_URL/traefik", name = "Traefik" },
   { url = "$BASE_URL/agent", name = "Agent" },
   { url = "$BASE_URL/weekly", name = "周记" },
   { url = "$BASE_URL/tags", name = "标签" },
@@ -46,3 +51,14 @@ even_menu = [
 ]
 
 even_title = "卢氏传说"
+
+# ICP / public security filings -----------------------------------------
+# ICP 备案号,格式:省份简称+ICP备+数字+号-(子站编号)
+# 例:京ICP备12345678号-1
+# 留空则不显示该项
+icp_filing = ""
+
+# 公安备案号,格式:省份简称+公网安备+数字+号
+# 例:京公网安备 11010802000000号
+# 留空则不显示该项
+police_filing = ""

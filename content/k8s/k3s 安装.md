@@ -38,3 +38,50 @@ clusters:
     # 去掉认证, 添加下面这个
     insecure-skip-tls-verify: true
 ```
+
+### 添加域名支持和ACME
+
+> 首先做好域名和主机 ip 的解析工作
+>
+> 域名在腾讯云. 需要准备 `TENCENTCLOUD_SECRET_ID` 和 `TENCENTCLOUD_SECRET_KEY` [acme 配置说明](https://go-acme.github.io/lego/dns/tencentcloud/)
+
+1. 补充 secret
+
+    ```bash
+    kubectl create secret generic traefik-dns-creds \
+      --from-literal=TENCENTCLOUD_SECRET_ID='<AK>' \
+      --from-literal=TENCENTCLOUD_SECRET_KEY='<SK>' \
+      -n kube-system
+    ```
+
+2. 补充 traefik 的 `acme` 配置
+
+    ```bash
+    cat >> /var/lib/rancher/k3s/server/manifests/traefik-acme-config.yaml << EOF
+    apiVersion: helm.cattle.io/v1
+    kind: HelmChartConfig
+    metadata:
+      name: traefik
+      namespace: kube-system
+    spec:
+      valuesContent: |-
+        certificatesResolvers:
+          default:
+            acme:
+              email: <email>
+              storage: /data/acme.json
+              dnsChallenge:
+                provider: tencentcloud
+        env:
+          - name: TENCENTCLOUD_SECRET_ID
+            valueFrom:
+              secretKeyRef:
+                name: traefik-dns-creds
+                key: TENCENTCLOUD_SECRET_ID
+          - name: TENCENTCLOUD_SECRET_KEY
+            valueFrom:
+              secretKeyRef:
+                name: traefik-dns-creds
+                key: TENCENTCLOUD_SECRET_KEY
+    EOF
+    ```
